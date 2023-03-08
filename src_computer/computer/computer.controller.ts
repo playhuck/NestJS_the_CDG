@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { CpuService } from 'src/cpu/cpu.service';
-import { DiskService } from 'src/disk/disk.service';
+import { CpuService } from 'src_computer/cpu/cpu.service';
+import { DiskService } from 'src_computer/disk/disk.service';
 
 @Controller('computer')
 export class ComputerController {
