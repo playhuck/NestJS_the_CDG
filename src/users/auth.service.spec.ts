@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
-describe(`Can create an instance of auth service`, async () => {
+it(`Can create an instance of auth service`, async () => {
   /** Create a fake copy of the user service */
   const fakeUserService = {
     find: () => Promise.resolve([]),
