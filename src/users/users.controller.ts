@@ -30,7 +30,6 @@ export class UsersController {
   ) {}
 
   @Get('/whoami')
-  @UseGuards(AuthGuard)
   whoAmI(@CurrentUser() user: User) {
     return user;
   }
@@ -63,8 +62,11 @@ export class UsersController {
     return user;
   }
 
-  @Get()
-  findAllUsers(@Query('email') email: string) {
+  // @Get()
+  // findAllUsers(@Query('email') email: string) {
+  //   return this.usersService.find(email);
+  // }
+  findAllUsers(email: string) {
     return this.usersService.find(email);
   }
 
