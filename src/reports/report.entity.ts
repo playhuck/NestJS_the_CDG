@@ -1,10 +1,13 @@
-import { User } from 'src/users/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Report {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ default: false })
+  approved: boolean;
 
   @Column()
   price: number;
@@ -18,18 +21,15 @@ export class Report {
   @Column()
   year: number;
 
-  /** 경도 longitude */
   @Column()
   lng: number;
 
-  /** 위도 latitude */
   @Column()
   lat: number;
 
-  /** 주행거리 */
   @Column()
   mileage: number;
 
   @ManyToOne(() => User, (user) => user.reports)
-  user : User;
+  user: User;
 }
