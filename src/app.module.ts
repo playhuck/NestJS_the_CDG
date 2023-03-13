@@ -20,8 +20,12 @@ const cookieSession = require('cookie-session');
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
-          type: 'sqlite',
-          database: config.get<string>('DB_NAME'),
+          type: 'mariadb',
+          port : 3306,
+          host : config.get<string>('DB_HOST'),
+          username : config.get<string>('DB_USERNAME'),
+          password : config.get<string>('DB_PASSWORD'),
+          database: config.get<string>('DB_DATABASE'),
           synchronize: true,
           entities: [User, Report],
         };
@@ -48,11 +52,14 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private configService : ConfigService) {
+    
+  }
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['asdfasfd'],
+          keys: [this.configService.get<string>('COOKIE_SECRET')],
         }),
       )
       .forRoutes('*');
